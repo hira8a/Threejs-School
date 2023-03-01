@@ -1,5 +1,5 @@
 <template>
-    <canvas ref="cvas"></canvas>
+    <canvas ref="cvas" class="galleryMap"></canvas>
 </template>
 
 <script setup lang="ts">
@@ -17,5 +17,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.galleryMap {
+    z-index: -1;
+}
 
 </style>

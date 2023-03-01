@@ -3,15 +3,29 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 // 静态路由
 export const constantRoutes: Array<RouteRecordRaw> = [
     {
-        path: '/test',
-        component: () => import('@/views/gallery/index.vue'),
+        path: '/',
+        component: () => import('@/views/home/index.vue'),
+        redirect: '/qitou',
         meta: { hidden: true },
+        children: [
+            {
+                path: '/gallery',
+                component: () => import('@/views/gallery/index.vue'),
+                meta: { hidden: true },
+            },
+            {
+                path: '/qitou',
+                component: () => import('@/views/qitou/index.vue'),
+                meta: { hidden: true },
+            },
+            {
+                path: '/test',
+                component: () => import('@/views/test/index.vue'),
+                meta: { hidden: true },
+            },
+        ]
     },
-    {
-        path: '/qitou',
-        component: () => import('@/views/qitou/index.vue'),
-        meta: { hidden: true },
-    },
+    
 ];
 
 // 创建路由实例

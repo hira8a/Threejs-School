@@ -223,7 +223,8 @@ onMounted(() => {
       if (!store.funConfig.weather.sunny) {
         CloudAndRain();
         //location.reload();
-      } else {
+      } 
+      if(store.funConfig.weather.sunny || store.funConfig.weather.cloudy) {
         scene.remove(rainDrop.instance);
         console.log(scene);
         for (let i = 0; i < 30; i++) {

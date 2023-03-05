@@ -152,7 +152,7 @@ export const init = (canvas: HTMLCanvasElement) => {
     scene.add(modelGroup);
 
     // 实例化控制器
-    controls = new OrbitControls(camera, renderer.domElement);
+    //controls = new OrbitControls(camera, renderer.domElement);
 
     // 监听屏幕的大小改变，修改渲染器的宽高，相机的比例
     window.addEventListener("resize", () => {
@@ -162,17 +162,17 @@ export const init = (canvas: HTMLCanvasElement) => {
     });
     console.log(weatherOption);
 
-    CloudAndRain();
+    //CloudAndRain();
 
-    //const playerCollider = new Capsule(new THREE.Vector3(0, 0.35, 0), new THREE.Vector3(0, 1, 0), 0.35);
-    //const player = new CollisionController(camera, canvas, playerCollider, modelGroup);
+    const playerCollider = new Capsule(new THREE.Vector3(0, 0.2, 0), new THREE.Vector3(0, 0.4, 0), 0.35);
+    const player = new CollisionController(camera, canvas, playerCollider, modelGroup);
     function render() {
-        RainAnimate();
+        //RainAnimate();
         // 渲染场景
         renderer.render(scene, camera);
         // 引擎自动更新渲染器
         AnimationId = requestAnimationFrame(render);
-        //player.update();
+        player.update();
     }
     render();
     //console.log(AnimationId);

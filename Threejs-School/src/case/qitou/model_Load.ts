@@ -7,7 +7,7 @@ const Load = (modelGroup: any) => {
     const bulid1Url = new URL('@/assets/model/house9.glb', import.meta.url).href;
     bulidLoader1.load(bulid1Url, (gltf) => {
         let model = gltf.scene;
-        model.scale.set(0.8, 0.5, 1);
+        model.scale.set(0.8, 0.6, 1);
         model.position.set(30, 0, -18);
         model.rotateY(Math.PI / 2);
         //遍历子节点，开启每个子节点的阴影模式。
@@ -19,13 +19,13 @@ const Load = (modelGroup: any) => {
         });
         //scene.add(model);
         modelGroup.add(model);
-        cloneModel(model, modelGroup, 30, 0, 17, 0);
+        cloneModel(model, modelGroup, 30, 0, 17.5, 0);
     });
 
     const bulidLoader1_1 = new GLTFLoader();
     bulidLoader1_1.load(bulid1Url, (gltf) => {
         let model = gltf.scene;
-        model.scale.set(0.55, 0.5, 1);
+        model.scale.set(0.55, 0.6, 1);
         model.position.set(6, 0, -24);
         model.rotateY(Math.PI / 1);
         //遍历子节点，开启每个子节点的阴影模式。
@@ -42,7 +42,7 @@ const Load = (modelGroup: any) => {
     const bulidLoader1_2 = new GLTFLoader();
     bulidLoader1_2.load(bulid1Url, (gltf) => {
         let model = gltf.scene;
-        model.scale.set(1.2, 0.5, 1);
+        model.scale.set(1.2, 0.6, 1);
         model.position.set(-23, 0, 26);
         model.rotateY(Math.PI / -2);
         //遍历子节点，开启每个子节点的阴影模式。

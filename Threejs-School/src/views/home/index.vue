@@ -64,7 +64,7 @@ const state = reactive({
           path: "/test",
           icon: "iconfont icon-map",
           children: [],
-        },
+        }
       ],
     },
     {
@@ -74,8 +74,8 @@ const state = reactive({
       children: [],
     },
   ],
-  timeValue: '',
-  weatherValue: '',
+  timeValue: store.funConfig.timeName,
+  weatherValue: store.funConfig.weatherName,
   timeOptions: [
     {
       value: 'success',
@@ -108,9 +108,9 @@ const state = reactive({
       label: '雷雨',
     },
   ],
-  timeName: '',
+  timeName: store.funConfig.timeName,
   timeType: 'success',
-  weatherName: '',
+  weatherName: store.funConfig.weatherName,
   weatherType: 'danger'
 });
 

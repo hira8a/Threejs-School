@@ -50,7 +50,7 @@ class CollisionController {
       this.camera.rotation.order = 'YXZ' // 相机旋转方式需要调整一下
       this.collisionGroup = collisionGroup
       this.canvas = canvas
-      this.position = position || new Vector3(0, 0, 0)
+      this.position = position || new Vector3(20, 0, 0)
       this.initWorld() // 初始化碰撞检测
       this.initEventListener() // 初始化事件侦听
     }

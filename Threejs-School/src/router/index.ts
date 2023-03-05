@@ -23,6 +23,11 @@ export const constantRoutes: Array<RouteRecordRaw> = [
                 component: () => import('@/views/test/index.vue'),
                 meta: { hidden: true },
             },
+            {
+                path: '/ttk',
+                component: () => import('@/views/t1/index.vue'),
+                meta: { hidden: true },
+            },
         ]
     },
     

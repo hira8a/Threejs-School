@@ -166,6 +166,8 @@ export const init = (canvas: HTMLCanvasElement) => {
 
     const playerCollider = new Capsule(new THREE.Vector3(0, 0.2, 0), new THREE.Vector3(0, 0.4, 0), 0.35);
     const player = new CollisionController(camera, canvas, playerCollider, modelGroup);
+    player.initWorld();
+    player.initEventListener();
     function render() {
         //RainAnimate();
         // 渲染场景

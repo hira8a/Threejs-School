@@ -7,17 +7,17 @@ import {
 
 const smokeUrl = new URL('@/assets/images/rain/smoke.png', import.meta.url).href;
 const texture = new TextureLoader().load(smokeUrl)
-const cloudGeo = new PlaneGeometry(564, 300)
+const cloudGeo = new PlaneGeometry(800, 800)
 const cloudMaterial = new MeshLambertMaterial({
     map: texture,
-    transparent: true
+    transparent: true,
 })
 export default class Cloud {
     instance: any;
 
     constructor() {
         const cloud = new Mesh(cloudGeo, cloudMaterial)
-        cloud.material.opacity = 0.6
+        cloud.material.opacity = 0.4
         this.instance = cloud
     }
 

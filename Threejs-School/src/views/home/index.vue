@@ -156,6 +156,7 @@ const changeTime = (value: string) => {
   let timeObj: any = state.timeOptions.find((item) => {
     return item.value == value;
   })
+  store.switchTime(timeObj.label);
   state.timeName = timeObj.label;
   state.timeType = timeObj.value;
 }
@@ -167,7 +168,6 @@ const changeWeather = (value: string) => {
   store.switchWeather(weatherObj.label);
   state.weatherName = weatherObj.label;
   state.weatherType = weatherObj.value;
-  store.num = '0xff0000';
 }
 
 const changeView = (value: boolean) => {

@@ -7,7 +7,7 @@ import {
 
 const smokeUrl = new URL('@/assets/images/rain/smoke.png', import.meta.url).href;
 const texture = new TextureLoader().load(smokeUrl)
-const cloudGeo = new PlaneGeometry(800, 800)
+const cloudGeo = new PlaneGeometry(1000, 1000)
 const cloudMaterial = new MeshLambertMaterial({
     map: texture,
     transparent: true,

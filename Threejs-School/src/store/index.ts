@@ -20,9 +20,8 @@ export const useStore = defineStore('useStore', {
                 },
                 theFirstPerson: false
             } as tOptions,
-            num: '0x00ff00'
         }
-    }, 
+    },
     persist: {
         enabled: true,
         // 自定义持久化参数
@@ -41,7 +40,7 @@ export const useStore = defineStore('useStore', {
         switchWeather(label: string) {
             this.funConfig.weatherName = label;
             if (label === '晴天') {
-                this.funConfig.weather  = {
+                this.funConfig.weather = {
                     sunny: true,
                     cloudy: false,
                     rain: false,
@@ -72,6 +71,31 @@ export const useStore = defineStore('useStore', {
                     lightning: true
                 };
             };
+        },
+
+        switchTime(label: string) {
+            this.funConfig.timeName = label;
+            if (label === '早上') {
+                this.funConfig.time = {
+                    morning: true,
+                    noon: false,
+                    afternoon: false
+                }
+            } 
+            if(label === '中午') {
+                this.funConfig.time = {
+                    morning: false,
+                    noon: true,
+                    afternoon: false
+                }
+            }
+            if(label === '傍晚') {
+                this.funConfig.time = {
+                    morning: false,
+                    noon: false,
+                    afternoon: true
+                }
+            }
         }
     }
 });

@@ -47,7 +47,7 @@ onMounted(() => {
     renderer.toneMappingExposure = 0.5;
 
     let scene = new THREE.Scene();
-    let camera = new AnimatCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
+    let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
     camera.position.set(-80, 60, 0);
 
     let light = new THREE.AmbientLight(0x404040, 1); // soft white light
@@ -65,11 +65,12 @@ onMounted(() => {
 
     //加载模型
     let modelGroup = new THREE.Group();
+    modelGroup.name = 'qitou';
     Load(modelGroup);
 
     // 辅助坐标系  参数250表示坐标系大小，可以根据场景大小去设置
     let axisHelper = new THREE.AxesHelper(250);
-    scene.add(axisHelper);
+    //scene.add(axisHelper);
 
     // 添加平面
     const planeGeometry = new THREE.BoxGeometry(150, 0.1, 150);
@@ -268,6 +269,34 @@ onMounted(() => {
         //player.clearEventListener();
     }
 
+
+    //光线投射
+    let INTERSECTED:any;
+    const pointer = new THREE.Vector2();
+    let raycaster = new THREE.Raycaster();
+
+    // 将鼠标位置归一化为设备坐标。x 和 y 方向的取值范围是 (-1 to +1)
+    function onPointerMove(event: MouseEvent) {
+        pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+        pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+        pickModel();
+    }
+    window.addEventListener('click', onPointerMove );
+
+    //点击模型反馈
+    function pickModel() {
+        raycaster.setFromCamera(pointer, camera);
+        const intersects = raycaster.intersectObjects(scene.children[2].children, true);
+        if (intersects.length > 0) {
+            if (INTERSECTED != intersects[0].object) {
+                INTERSECTED = intersects[0].object;
+                console.log(INTERSECTED);
+            }
+        } else {
+            INTERSECTED = null;
+        }
+    }
+
     function render() {
         if (!store.funConfig.weather.sunny) {
             RainAnimate();
@@ -275,6 +304,7 @@ onMounted(() => {
         if (store.funConfig.theFirstPerson) {
             player.update();
         }
+        
         // 渲染场景
         renderer.render(scene, camera);
         // 引擎自动更新渲染器
@@ -283,7 +313,6 @@ onMounted(() => {
     render();
 
     watchEffect(() => {
-        console.log(store.funConfig)
         if (!store.funConfig.weather.sunny) {
             CloudAndRain();
             point.intensity = 0;
@@ -304,11 +333,11 @@ onMounted(() => {
                 initSky(effectController2);
             }
         }
-        if(store.funConfig.weather.cloudy) {
+        if (store.funConfig.weather.cloudy) {
             scene.remove(rainDrop.instance);
             initSky(effectController3);
         }
-        if(store.funConfig.weather.rain || store.funConfig.weather.lightning) {
+        if (store.funConfig.weather.rain || store.funConfig.weather.lightning) {
             initSky(effectController4);
         }
         //clearScene();

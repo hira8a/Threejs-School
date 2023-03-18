@@ -60,6 +60,7 @@ onMounted(() => {
   const box = new THREE.Mesh(boxGeometry, boxMaterial);
 
   let modelGroup = new THREE.Group();
+  modelGroup.name = '测试';
 
   const bulidLoader1 = new GLTFLoader();
   const bulid1Url = new URL('@/assets/model/house9.glb', import.meta.url).href;
@@ -215,6 +216,37 @@ onMounted(() => {
   const playerCollider = new Capsule(new THREE.Vector3(0, 0.2, 0), new THREE.Vector3(0, 0.4, 0), 0.35);
   const player = new CollisionController(camera, canvas, playerCollider, modelGroup);
 
+  //光线投射
+  let INTERSECTED;
+  const pointer = new THREE.Vector2();
+  let raycaster = new THREE.Raycaster();
+
+  // 将鼠标位置归一化为设备坐标。x 和 y 方向的取值范围是 (-1 to +1)
+  function onPointerMove(event: MouseEvent) {
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+  }
+  window.addEventListener('mousemove', onPointerMove);
+
+  //点击模型反馈
+  function pickModel() {
+    raycaster.setFromCamera(pointer, camera);
+    const intersects = raycaster.intersectObjects(scene.children[2].children, false);
+    //console.log(scene);
+    if (intersects.length > 0) {
+      if (INTERSECTED != intersects[0].object) {
+        // if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+        INTERSECTED = intersects[0].object;
+        // INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+        // INTERSECTED.material.emissive.setHex(0xff0000);
+        console.log(intersects);
+      }
+    } else {
+      // if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+      INTERSECTED = null;
+    }
+  }
+
   function render() {
     if (!store.funConfig.weather.sunny) {
       RainAnimate();
@@ -222,12 +254,14 @@ onMounted(() => {
     if (store.funConfig.theFirstPerson) {
       player.update();
     }
+
+    window.addEventListener('click', pickModel);
     // 渲染场景
     renderer.render(scene, camera);
     // 引擎自动更新渲染器
     AnimationId = requestAnimationFrame(render);
   }
-  
+
 
   watchEffect(() => {
 

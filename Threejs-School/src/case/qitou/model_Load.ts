@@ -17,7 +17,7 @@ const Load = (modelGroup: any) => {
                 child.receiveShadow = true;
             }
         });
-        //scene.add(model);
+        model.name = '18栋';
         modelGroup.add(model);
         cloneModel(model, modelGroup, 30, 0, 17.5, 0);
     });
@@ -35,7 +35,6 @@ const Load = (modelGroup: any) => {
                 child.receiveShadow = true;
             }
         });
-        //scene.add(model);
         modelGroup.add(model);
     });
 
@@ -52,7 +51,6 @@ const Load = (modelGroup: any) => {
                 child.receiveShadow = true;
             }
         });
-        //scene.add(model);
         modelGroup.add(model);
         cloneModel(model, modelGroup, -5, 0, 26, 1);
     });
@@ -71,7 +69,6 @@ const Load = (modelGroup: any) => {
                 child.receiveShadow = true;
             }
         });
-        //scene.add(model);
         modelGroup.add(model);
     });
 
@@ -82,7 +79,6 @@ const Load = (modelGroup: any) => {
         let model = gltf.scene;
         model.scale.set(0.2, 0.05, 0.05);
         model.position.set(-60, 0.07, 60);
-        //model.rotateY(Math.PI / -2);
         model.traverse((child) => {
             if (child.isMesh) {
                 //child.castShadow = true;
@@ -97,7 +93,6 @@ const Load = (modelGroup: any) => {
         cloneModel(model, modelGroup, -24, 0.07, -33.8, 0);
         cloneModel(model, modelGroup, 49.44, 0.07, 30, 2);
         cloneModel(model, modelGroup, 49.44, 0.07, 59, 2);
-        //cloneModel(model, scene, -20, 0.07, 45, 0);
     });
     const roadLoader1_1 = new GLTFLoader();
     roadLoader1_1.load(road1Url, (gltf) => {
